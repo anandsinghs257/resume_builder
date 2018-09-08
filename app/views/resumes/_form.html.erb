@@ -1,0 +1,150 @@
+<%= form_with(model: resume, local: true) do |form| %>
+  <% if resume.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(resume.errors.count, "error") %> prohibited this resume from being saved:</h2>
+
+      <ul>
+      <% resume.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <h4>Basic Details</h4>
+    <%= form.label :First_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Address %>
+    <%= form.text_field :address %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :State %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :City %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Pincode %>
+    <%= form.text_field :pincode %>
+  </div>  
+
+  <div class="field">
+    <%= form.label :Country %>
+    <%= form.text_field :country %>
+  </div>  
+
+  <div class="field">
+  <h4>Education</h4>
+    <%= form.label :College_name %>
+    <%= form.text_field :college_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Aggregate_mark %>
+    <%= form.text_field :aggregate_mark %>
+  </div>    
+
+  <div class="field">
+    <%= form.label :Address %>
+    <%= form.text_field :college_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :School_name_10th %>
+    <%= form.text_field :school_name_10th %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Aggregate_marks %>
+    <%= form.text_field :aggregate_mark_10th%>
+  </div>
+
+  <div class="field">
+    <%= form.label :Address %>
+    <%= form.text_field :school_10th_address %>
+  </div>
+
+    <div class="field">
+     <%= form.label :School_name_12th %>
+     <%= form.text_field :school_name_12th %>
+    </div>
+
+    <div class="field">
+     <%= form.label :Aggregate_marks %>
+     <%= form.text_field :aggregate_mark_12th %>
+    </div>
+
+    <div class="field">
+     <%= form.label :Address %>
+     <%= form.text_field :school_12th_address %>
+    </div>    
+
+    <div class="field">
+    <h4>Expierence</h4>
+     <%= form.label :Job_title %>
+     <%= form.text_field :job_title %>
+    </div>
+
+    <div class="field">
+     <%= form.label :Company_name %>
+     <%= form.text_field :company_name %>
+    </div>
+
+    <div class="field">
+     <%= form.label :Location %>
+     <%= form.text_field :location%>
+    </div>
+
+    <div class="field">
+     <%= form.label :Salary %>
+     <%= form.text_field :salary %>
+    </div> 
+
+    <div class="field">
+     <%= form.label :From %>
+     <%= form.text_field :from %>
+    </div>    
+
+    <div class="field">
+     <%= form.label :To %>
+     <%= form.text_field :to %>
+    </div>    
+
+    <div class="field">
+     <%= form.label :Hobbies_interest %>
+     <%= form.text_field :hobbies_interest %>
+    </div>
+
+    <div class="field">
+     <%= form.label :Professional_skills %>
+     <%= form.text_field :professional_skills %>
+    </div>
+
+    <div class="field">
+     <%= form.label :Languages %>
+     <%= form.text_field :languages %>
+    </div>            
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,76 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Resumes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First_name</th>
+      <th>Last_name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>pincode</th>
+      <th>Country</th>
+      <th>College_name</th>
+      <th>Aggregate_mark</th>
+      <th>College_address</th>
+      <th>School_name_10th</th>
+      <th>Aggregate_mark_10th</th>
+      <th>School_10th_address</th>
+      <th>School_name_12th</th>
+      <th>Aggregate_mark_12th</th>
+      <th>School_12th_address</th>
+      <th>Job_title</th>
+      <th>Company_name</th>
+      <th>Location</th>
+      <th>Salary</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Hobbies_interest</th>
+      <th>Professional_skills</th>
+      <th>Languages</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @resumes.each do |resume| %>
+      <tr>
+        <td><%= resume.first_name %></td>
+        <td><%= resume.last_name %></td>
+        <td><%= resume.email %></td>
+        <td><%= resume.address %></td>
+        <td><%= resume.city %></td>
+        <td><%= resume.pincode %></td>
+        <td><%= resume.country %></td>                
+        <td><%= resume.college_name %></td>
+        <td><%= resume.aggregate_mark %></td> 
+        <td><%= resume.college_address %></td>
+        <td><%= resume.school_name_10th %></td> 
+        <td><%= resume.aggregate_mark_10th %></td>
+        <td><%= resume.school_10th_address%></td>
+        <td><%= resume.school_name_12th%></td>
+        <td><%= resume.aggregate_mark_12th%></td>
+        <td><%= resume.school_12th_address%></td>
+        <td><%= resume.job_title%></td>
+        <td><%= resume.company_name%></td>
+        <td><%= resume.location%></td>
+        <td><%= resume.salary%></td>
+        <td><%= resume.from%></td>
+        <td><%= resume.to%></td> 
+        <td><%= resume.hobbies_interest%></td>
+        <td><%= resume.professional_skills%></td>
+        <td><%= resume.languages%></td>                               
+        
+        <td><%= link_to 'Show', resume %></td>
+        <td><%= link_to 'Edit', edit_resume_path(resume) %></td>
+        <td><%= link_to 'Destroy', resume, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Resume', new_resume_path %>

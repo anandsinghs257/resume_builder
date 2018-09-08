@@ -1,0 +1,1244 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCKZFDL');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="utf-8">
+    <title>Easy Online Resume Builder - Create or Upload Your Résumé</title>
+    <meta name="description" content="Resume.com's Free Online Resume Maker: our professional resume templates make it easy to build &amp; share your résumé. Fast, easy, and fun - just click to begin!">
+    <meta name="theme-color" content="#eee">
+    <link rel="shortcut icon" href="http://img.resume.com/icon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://img.resume.com/icon/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <script type="application/ld+json">
+        {
+           "@context":"http://schema.org/",
+           "@type":"Organization",
+           "address":{
+              "@type":"PostalAddress",
+              "addressCountry":"Canada",
+              "addressLocality":"Vancouver",
+              "addressRegion":"BC",
+              "postalCode":"V6B 2T4",
+              "streetAddress":"205 - 1080 Mainland Street"
+           },
+           "mainEntityOfPage":{
+              "@type":"WebPage",
+              "@id":"https://www.resume.com/builder"
+           },
+           "name":"Resume.com",
+           "Description":"Easy free online resume builder",
+           "disambiguatingDescription":"An online resume maker with free resume templates for job seekers to create their own resumes and cover letters online",
+           "logo":{"@type":"ImageObject","url":"https://img.resume.com/og/home.png","height":"637","width":"1205"},
+           "url":[
+              "https://www.resume.com/builder"
+           ],
+           "sameAs":[
+              "https://www.facebook.com/resumecom",
+              "https://twitter.com/resumecom",
+              "https://www.linkedin.com/company/resume-com",
+              "https://www.instagram.com/resumecom/",
+              "https://medium.com/resumecom",
+              "https://support.resume.com/"
+           ]
+        }
+    </script>
+    <link rel="manifest" href="/pwa/builder.json">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/typeahead.bundle.min.js"></script>
+
+    <link rel="preload" onload="this.onload=null;this.rel='stylesheet'" as="style" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="preload" onload="this.onload=null;this.rel='stylesheet'" as="style" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="preload" onload="this.onload=null;this.rel='stylesheet'" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/Ladda/1.0.6/ladda-themeless.min.css" />
+    <noscript><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></noscript>
+    <noscript><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></noscript>
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Ladda/1.0.6/ladda-themeless.min.css" /></noscript>
+
+    <!-- LADDA -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Ladda/1.0.6/spin.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Ladda/1.0.6/ladda.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Ladda/1.0.6/ladda.jquery.min.js"></script>
+    <!-- LADDA -->
+
+	<script>
+		/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+		/* This file is meant as a standalone workflow for
+		- testing support for link[rel=preload]
+		- enabling async CSS loading in browsers that do not support rel=preload
+		- applying rel preload css once loaded, whether supported or not.
+		*/
+		(function( w ){
+			"use strict";
+			// rel=preload support test
+			if( !w.loadCSS ){
+				w.loadCSS = function(){};
+			}
+			// define on the loadCSS obj
+			var rp = loadCSS.relpreload = {};
+			// rel=preload feature support test
+			// runs once and returns a function for compat purposes
+			rp.support = (function(){
+				var ret;
+				try {
+					ret = w.document.createElement( "link" ).relList.supports( "preload" );
+				} catch (e) {
+					ret = false;
+				}
+				return function(){
+					return ret;
+				};
+			})();
+
+			// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+			// then change that media back to its intended value on load
+			rp.bindMediaToggle = function( link ){
+				// remember existing media attr for ultimate state, or default to 'all'
+				var finalMedia = link.media || "all";
+
+				function enableStylesheet(){
+					link.media = finalMedia;
+				}
+
+				// bind load handlers to enable media
+				if( link.addEventListener ){
+					link.addEventListener( "load", enableStylesheet );
+				} else if( link.attachEvent ){
+					link.attachEvent( "onload", enableStylesheet );
+				}
+
+				// Set rel and non-applicable media type to start an async request
+				// note: timeout allows this to happen async to let rendering continue in IE
+				setTimeout(function(){
+					link.rel = "stylesheet";
+					link.media = "only x";
+				});
+				// also enable media after 3 seconds,
+				// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+				setTimeout( enableStylesheet, 3000 );
+			};
+
+			// loop through link elements in DOM
+			rp.poly = function(){
+				// double check this to prevent external calls from running
+				if( rp.support() ){
+					return;
+				}
+				var links = w.document.getElementsByTagName( "link" );
+				for( var i = 0; i < links.length; i++ ){
+					var link = links[ i ];
+					// qualify links to those with rel=preload and as=style attrs
+					if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+						// prevent rerunning on link
+						link.setAttribute( "data-loadcss", true );
+						// bind listeners to toggle media back
+						rp.bindMediaToggle( link );
+					}
+				}
+			};
+
+			// if unsupported, run the polyfill
+			if( !rp.support() ){
+				// run once at least
+				rp.poly();
+
+				// rerun poly on an interval until onload
+				var run = w.setInterval( rp.poly, 500 );
+				if( w.addEventListener ){
+					w.addEventListener( "load", function(){
+						rp.poly();
+						w.clearInterval( run );
+					} );
+				} else if( w.attachEvent ){
+					w.attachEvent( "onload", function(){
+						rp.poly();
+						w.clearInterval( run );
+					} );
+				}
+			}
+
+
+			// commonjs
+			if( typeof exports !== "undefined" ){
+				exports.loadCSS = loadCSS;
+			}
+			else {
+				w.loadCSS = loadCSS;
+			}
+		}( typeof global !== "undefined" ? global : this ) );
+	</script>
+
+    <style>
+        html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;background-color:#eee;color:#4a4a4a;}a{background-color:transparent;color:#337ab7;text-decoration:none}.hide{display:none}.header2.r-builder{margin-bottom:0}.frontpageFooter{background-color:#e3e3e3;line-height:50px;padding:60px 0;text-align:center;width:100%}.frontpageFooter ul{list-style:none;line-height:1.4em;font-size:1.1em;text-align:left;font-weight:300;padding:0}.frontpageFooter ul hr{margin:0 0 8px;border-bottom:1px solid #4a4a4a}.frontpageFooter ul li:first-child{font-size:17px;font-weight:600;margin-bottom:8px;min-height:30px}.frontpageFooter ul li>a{color:#4a4a4a;font-size:16px;line-height:1.56;font-weight:400}.frontpageFooter ul li>a:focus{outline:0;outline-offset:0}.frontpageFooter ul .footer-legal a:hover,.frontpageFooter ul li>a:hover{text-decoration:underline;color:#000}.frontpageFooter .stay-connected{display:flex;justify-content:space-between}@media (min-width:768px) and (max-width:1200px){.frontpageFooter .stay-connected{display:block}}.frontpageFooter .stay-connected a{width:45px;height:45px;display:inline-block;margin:0 5px 10px 0}.frontpageFooter .stay-connected a .stay-connected-path{fill:#b5b5b5;text-decoration:none}.frontpageFooter .stay-connected a:hover .stay-connected-path{fill:#696969;text-decoration:none}.frontpageFooter .footer-legal span{padding-right:10px;font-size:12px}.frontpageFooter .footer-legal .cc-text,.frontpageFooter .footer-legal a{color:#696969}.frontpageFooter .header1{font-size:55px;font-weight:300;margin:0 0 32px}@media (max-width:768px){.header1{font-size:36px;margin-bottom:22px}}.header2{font-size:40px;font-weight:300}.header3{font-size:30px;font-weight:300}.header2{margin:0 0 27px}.header3{margin:0 0 20px}.header4{font-size:22px;font-weight:300;margin:0 0 35px}#signinTab .modal-body-footer{margin-top:8px;font-size:14px}.btn-lg,.main_section{font-size:20px;font-weight:300}.main_section{padding-top:60px;padding-bottom:60px}.main_section.section-thin-padding{padding-top:25px;padding-bottom:25px}.boxed-green{background:#006620;color:#fff}.btn-success{color:#fff;background-color:#57c176}.btn{border-radius:3px;border:0}.btn-lg{padding:14px 65px}#templateSelection_grid .atemplate{border-radius:2px;box-sizing:border-box;margin:0 auto 10px;text-align:center;overflow:hidden;cursor:pointer}#templateSelection_grid .atemplate img{max-width:100%}#templateSelection_grid .atemplate .atemplateWrapper{border-color:#f7f7f7;border-radius:2px;border-style:solid;border-width:1px;box-shadow:0 1px 0 rgba(0,0,0,.07);margin:0 auto;max-width:340px;overflow:hidden}#templateSelection_grid .atemplate .atemplateWrapper .atemplateImage{position:relative}#templateSelection_grid .atemplate .atemplateWrapper .sample-resume-hover{opacity:0;height:100%;position:absolute;width:100%;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-o-transition:all .5s ease;-ms-transition:all .5s ease;transition:all .5s ease}#templateSelection_grid .atemplate .atemplateWrapper .sample-resume-hover .centeredPos{top:45%;left:50%;transform:translate(-50%,-50%);position:inherit;font-size:80px;color:#fff}#templateSelection_grid .atemplate .atemplateWrapper .sample-resume-hover span{bottom:0;color:#fff;font-size:16px;left:0;line-height:45px;position:absolute;width:100%}#templateSelection_grid .atemplate:hover .atemplateWrapper{border-color:#3da2e0}#templateSelection_grid .atemplate.currentSelectedTemplate .sample-resume-hover,#templateSelection_grid .atemplate:hover .sample-resume-hover{background-color:rgba(0,125,195,.75);opacity:1}#templateSelection_grid .template_type{background-color:#f7f7f7;border-radius:2px;color:#666;margin-left:2px;padding:2px 8px}#templateSelection_grid .template_name{background-color:#fafafa;border-top:1px dotted #f7f7f7;color:#444;display:block;font-size:14px;line-height:35px;margin:0 auto;overflow:hidden;padding:5px 10px;text-align:left;width:100%}.createaccountheight .apply-steps{width:100%;margin-bottom:0}.apply-steps{width:100%;margin:25px 0 15px}.apply-steps>.content>.title,.apply-steps>.steps .current-info{position:absolute;left:-99999px}.apply-steps>.content{position:relative;width:auto;padding:0}.apply-steps>.content>.body{padding:0 20px}.apply-steps>.content>iframe{border:0;width:100%;height:100%}.apply-steps>.steps{position:relative;display:block;width:100%;max-width:750px;margin:0 auto}.apply-steps>.steps>ul{display:table;width:100%;table-layout:fixed;margin:0;padding:0;list-style:none}.apply-steps>.steps>ul>li{display:table-cell;width:auto;vertical-align:top;text-align:center;position:relative}.apply-steps>.steps>ul>li a{position:relative;padding-top:50px;margin-bottom:20px;display:block;text-decoration:none}.apply-steps>.steps>ul>li:after,.apply-steps>.steps>ul>li:before{content:'';display:block;position:absolute;top:24px;width:50%;height:6px;background-color:#3da2e0;z-index:9}.apply-steps>.steps>ul>li:before{left:0}.apply-steps>.steps>ul>li:after{right:0}.apply-steps>.steps>ul>li:first-child:before,.apply-steps>.steps>ul>li:last-child:after{content:none}.apply-steps>.steps>ul>li.current:after,.apply-steps>.steps>ul>li.current~li:after,.apply-steps>.steps>ul>li.current~li:before{background-color:#fff}.apply-steps>.steps>ul>li.current>a{color:#3da2e0;cursor:default}.apply-steps>.steps>ul>li.current .icon,.apply-steps>.steps>ul>li.current .number{font-size:0;border-color:#3da2e0;background-color:#3da2e0;color:#fff}.apply-steps>.steps>ul>li.current .icon:after,.apply-steps>.steps>ul>li.current .number:after{content:'\f040';font-family:FontAwesome;display:inline-block;font-size:25px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:52px;-webkit-transition:all .15s ease-in-out;-o-transition:all .15s ease-in-out;transition:all .15s ease-in-out}.apply-steps>.steps>ul>li .icon.icon-step2:after{content:'\f007';color:#ccc;font-family:FontAwesome;display:inline-block;font-size:25px}.apply-steps>.steps>ul>li .icon.icon-step3:after{content:'\f040';color:#ccc;font-family:FontAwesome;display:inline-block;font-size:25px}.apply-steps>.steps>ul>li.current .icon.icon-step2:after,.apply-steps>.steps>ul>li.current .icon.icon-step3:after{color:#fff}.apply-steps>.steps>ul>li.disabled a,.apply-steps>.steps>ul>li.disabled a:focus,.apply-steps>.steps>ul>li.disabled a:hover{color:#999;cursor:default}.apply-steps>.steps>ul>li.done a,.apply-steps>.steps>ul>li.done a:focus,.apply-steps>.steps>ul>li.done a:hover{color:#999}.apply-steps>.steps>ul>li.done .icon,.apply-steps>.steps>ul>li.done .number{font-size:0;background-color:#3da2e0;border-color:#3da2e0;color:#fff}.apply-steps>.steps>ul>li.done .icon:after,.apply-steps>.steps>ul>li.done .number:after{content:'\f00c';font-family:FontAwesome;display:inline-block;font-size:25px;line-height:52px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-transition:all .15s ease-in-out;-o-transition:all .15s ease-in-out;transition:all .15s ease-in-out}.apply-steps>.steps>ul>li.error .icon,.apply-steps>.steps>ul>li.error .number{border-color:#F44336;color:#F44336}.apply-steps .step-text{text-decoration:none;margin-top:5px;display:block;font-size:16px;line-height:1.1}@media (max-width:480px){.apply-steps .step-text{display:none}.apply-steps .current .step-text{display:block}}.apply-steps.create-account-flow>.steps .icon,.apply-steps>.steps .icon,.apply-steps>.steps .number{background-color:#fff;display:inline-block;position:absolute;top:0;left:50%;margin-left:-19px;width:50px;height:50px;border-radius:50%;z-index:10;line-height:52px;text-align:center}.apply-steps>.steps .icon,.apply-steps>.steps .number{color:#3da2e0;font-size:17px}.apply-steps.create-account-flow>.steps .icon{color:#ccc;font-size:23px}.panel-flat>.apply-steps>.steps>ul{border-top:1px solid #ddd}.apply-steps>.actions{position:relative;display:block;text-align:right;padding:0 20px 20px}.apply-steps>.actions>ul{float:right;list-style:none;padding:0;margin:0}.apply-steps>.actions>ul:after{content:'';display:table;clear:both}.apply-steps>.actions>ul>li{float:left}.apply-steps>.actions>ul>li+li{margin-left:10px}.apply-steps>.actions>ul>li>a{background:#2196F3;color:#fff;display:block;padding:7px 12px;border-radius:3px;border:1px solid transparent}.apply-steps>.actions>ul>li>a:focus,.apply-steps>.actions>ul>li>a:hover{-webkit-box-shadow:0 0 0 100px rgba(0,0,0,.05) inset;box-shadow:0 0 0 100px rgba(0,0,0,.05) inset}.apply-steps>.actions>ul>li>a:active{-webkit-box-shadow:0 0 0 100px rgba(0,0,0,.1) inset;box-shadow:0 0 0 100px rgba(0,0,0,.1) inset}.apply-steps>.actions>ul>li>a[href="#previous"]{background-color:#fcfcfc;color:#333;border:1px solid #ddd}.apply-steps>.actions>ul>li>a[href="#previous"]:focus,.apply-steps>.actions>ul>li>a[href="#previous"]:hover{-webkit-box-shadow:0 0 0 100px rgba(0,0,0,.01) inset;box-shadow:0 0 0 100px rgba(0,0,0,.01) inset}.apply-steps>.actions>ul>li>a[href="#previous"]:active{-webkit-box-shadow:0 0 0 100px rgba(0,0,0,.03) inset;box-shadow:0 0 0 100px rgba(0,0,0,.03) inset}.apply-steps>.actions>ul>li.disabled>a,.apply-steps>.actions>ul>li.disabled>a:focus,.apply-steps>.actions>ul>li.disabled>a:hover{color:#999}.apply-steps>.actions>ul>li.disabled>a[href="#previous"],.apply-steps>.actions>ul>li.disabled>a[href="#previous"]:focus,.apply-steps>.actions>ul>li.disabled>a[href="#previous"]:hover{-webkit-box-shadow:none;box-shadow:none}.createaccountheight{min-height:750px}.createaccountheight .createflow-nav{background-color:#fff}.createaccountheight .createflow-nav .navbar-brand{height:60px;display:block;margin:0;padding:0}.createaccountheight #wizard-icon-nav{margin-bottom:0}.createaccountheight .grey-links{bottom:50px;width:100%;font-size:16px}.createaccountheight .grey-links a{margin-right:15px;color:#9b9b9b}.createaccountheight .grey-legal{color:#9b9b9b;font-size:16px;text-align:center}#createaccountCarousel .carousel-inner{overflow:visible;position:relative;width:100%}#createaccountCarousel .carousel-inner .mobile-back-btn{display:none}@media (max-width:767px){#createaccountCarousel .carousel-inner .mobile-back-btn{display:block;margin-top:15px}}#createaccountCarousel .carousel-inner .create-form{min-height:250px;padding-left:15px;padding-right:15px}@media (min-width:768px){#createaccountCarousel .carousel-inner .create-form{max-width:800px;min-height:175px;margin:0 auto}}#createaccountCarousel #activationCode .alert,#createaccountCarousel .alert{margin-bottom:5px}#createaccountCarousel .errsocial_buttonsmsg{margin-bottom:15px}#createaccountCarousel .social-connect-wrap{background-color:#fff;padding:45px;margin-bottom:15px}#createaccountCarousel .social-connect-wrap button{padding:22px 0}#createaccountCarousel .social-connect-wrap .btn-block+.btn-block{margin-top:20px}#createaccountCarousel .social-connect-wrap .man-pointing-social{height:250px}#createaccountCarousel .social-connect-wrap.social-buttons button i.fa{line-height:70px;font-size:27px}#createaccountCarousel .social-connect-wrap.social-buttons button .ladda-label{text-align:center;width:100%;display:block;margin-left:0}#activationCode label,#createaccountCarousel label{display:none}div#error-message{display:none;color:red;width:90%;min-width:400px;text-align:center;margin:0 auto}span.errorblock{color:red;text-align:center;width:500px}input.invalid{border:1px solid red}.resumeBuilder-icon-nav{padding-left:0;padding-right:0;width:100%;display:flex}.resumeBuilder-icon-nav.two-buttons a,.resumeBuilder-icon-nav.two-buttons button{width:50%}.resumeBuilder-icon-nav a,.resumeBuilder-icon-nav button{color:#fff!important;margin:0;padding:0;border-radius:0;box-shadow:none;transition:all .3s ease;float:left;width:33.33%;height:60px;line-height:60px;position:relative;font-size:18px}.resumeBuilder-icon-nav a i,.resumeBuilder-icon-nav button i{font-size:20px;vertical-align:middle}@media (max-width:468px){.resumeBuilder-icon-nav a i,.resumeBuilder-icon-nav button i{display:none}}.resumeBuilder-icon-nav a img,.resumeBuilder-icon-nav button img{display:inline-block;height:20px;vertical-align:middle;margin-right:2px}@media (max-width:468px){.resumeBuilder-icon-nav a img,.resumeBuilder-icon-nav button img{display:none}}.resumeBuilder-icon-nav a .arrow-up,.resumeBuilder-icon-nav button .arrow-up{border-bottom:10px solid #efefef;border-left:10px solid transparent;border-right:10px solid transparent;bottom:0;display:none;height:0;left:calc(50% - 10px);margin:0 0 -1px;position:absolute;width:0}.field-error{color:#d0011b;font-size:16px;line-height:1;margin-top:3px;display:block;font-weight:300}.form-control{font-size:20px;color:#5c5c5c;font-weight:300;padding:0 18px;border:1px solid #9b9b9b;box-shadow:none;height:60px;width:100%}.typeahead.dropdown-menu{width:calc(100% - 30px)}.boxed-blue{background:#3598dc;color:#fff}.boxed-turquoise{background:#43c5c7;color:#fff}.boxed-grey{background:#d6d6d6!important;color:#fff!important}.createflow-nav{background-color:#fff;height:60px;line-height:60px}.navbar-brand img{height:35px;width:185px}span.twitter-typeahead .tt-menu{cursor:pointer}.dropdown-menu,span.twitter-typeahead .tt-menu{position:absolute;top:100%;left:0;z-index:1000;display:none;float:left;min-width:160px;padding:5px 0;margin:2px 0 0;font-size:1rem;color:#373a3c;text-align:left;list-style:none;background-color:#fff;background-clip:padding-box;border:1px solid rgba(0,0,0,.15);border-radius:.25rem;width:100%}span.twitter-typeahead .tt-suggestion{display:block;width:100%;padding:3px 20px;clear:both;font-weight:400;line-height:1.5;color:#373a3c;text-align:inherit;white-space:nowrap;background:0 0;border:0}.dropdown-item:hover,span.twitter-typeahead .tt-suggestion:focus,span.twitter-typeahead .tt-suggestion:hover{color:#2b2d2f;text-decoration:none;background-color:#f5f5f5}span.twitter-typeahead .active.tt-suggestion,span.twitter-typeahead .active.tt-suggestion:focus,span.twitter-typeahead .active.tt-suggestion:hover,span.twitter-typeahead .tt-suggestion.tt-cursor,span.twitter-typeahead .tt-suggestion.tt-cursor:focus,span.twitter-typeahead .tt-suggestion.tt-cursor:hover{color:#fff;text-decoration:none;background-color:#0275d8;outline:0}span.twitter-typeahead .disabled.tt-suggestion,span.twitter-typeahead .disabled.tt-suggestion:focus,span.twitter-typeahead .disabled.tt-suggestion:hover{color:#818a91}span.twitter-typeahead .disabled.tt-suggestion:focus,span.twitter-typeahead .disabled.tt-suggestion:hover{text-decoration:none;cursor:not-allowed;background-color:transparent;background-image:none;filter:"progid:DXImageTransform.Microsoft.gradient(enabled = false)"}span.twitter-typeahead{width:100%}.input-group span.twitter-typeahead{display:block!important}.input-group span.twitter-typeahead .tt-menu{top:2.375rem!important}.main-text{margin-top:25px;}#createaccountCarousel{min-height:550px;}
+
+        .main-text a{color:#fff;text-decoration: underline;}
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2558086-9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-2558086-9');
+    </script>
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCKZFDL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="wrap" class="createaccountheight">
+    <div class="createflow-nav">
+        <div class="container">
+            <a class="navbar-brand" href="/"><img src="https://img.resume.com/logo/resume_logo_g_small.png" alt="Resume.com Logo" itemprop="logo"></a>
+        </div>
+    </div>
+    <div class="clearfix resumeBuilder-icon-nav two-buttons">
+        <a href="#Step1" class="btn boxed-blue text-center resumeBuilder-icon-1"><img src="https://img.resume.com/icons/wizard/nav_template.svg"> <span>Select Template</span> <span class="arrow-up" style="display: block;"></span></a>
+        <a href="#Step2" class="btn boxed-turquoise  text-center resumeBuilder-icon-2"><i class="fa fa-pencil"></i> <span>Details</span> <span class="arrow-up" style="display: none;"></span></a>
+    </div>
+
+    <div>
+        <div class="apply-steps">
+            <div class="steps clearfix">
+                <ul role="tablist">
+                    <li role="tab" id="selectTemplate" class="first current" aria-disabled="false" aria-selected="true">
+                        <a href="#Step1" class="resumeBuilder-icon-1" title="Select a Template"><span class="current-info audible">current step: </span><span class="number">1</span></a>
+                    </li>
+                    <li role="tab" id="userInfo" class="" aria-disabled="false" aria-selected="false">
+                        <a href="#Step2" class="resumeBuilder-icon-2" title="Add Resume Data"><span class="icon icon-step2"></span></a>
+                    </li>
+                    <li role="tab" class="disabled last" aria-disabled="true">
+                        <a href="#Step2" class="" title="Add Resuem Data"><span class="icon icon-step3"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="createaccountCarousel" class="carousel slide" data-ride="carousel"  data-interval="false">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <h3 class="header2 r-builder text-center">Build a resume</h3>
+                    <h4 class="header4 r-builder text-center">To get started, select a resume template below.</h4>
+                    <div id="templateSelection_grid" class="container">
+                        <div class="row">
+                            <!-- START TEMPLATE THUMBNAILS -->
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="1">
+                                <div class="atemplateWrapper">
+                                        <div class="atemplateImage">
+                                            <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                            <img itemprop="image" alt="A sample template of a Traditional resume" src="https://img.resume.com/templates/1.png" data-srcset="https://img.resume.com/templates/1.png" class="tmpl_preview">
+                                        </div>
+                                        <span class="template_name">Traditional</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="5">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Improved Traditional resume" src="https://img.resume.com/templates/5.png" data-srcset="https://img.resume.com/templates/5.png" class="tmpl_preview">
+                                    </div>
+                                    <span class="template_name">Improved Traditional</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="4">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Large resume" src="https://img.resume.com/templates/4.png" data-srcset="https://img.resume.com/templates/4.png" class="tmpl_preview">
+                                    </div>
+                                    <span class="template_name">Large</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="14">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Modern resume" src="https://img.resume.com/templates/14.png" data-srcset="https://img.resume.com/templates/14.png" class="tmpl_preview">
+                                    </div>
+                                    <span class="template_name">Modern<span class="template_type">Digital</span></span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="18">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Letter Block resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/18.png" data-srcset="https://img.resume.com/templates/18.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Letter Block</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="17">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Blue Skies resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/17.png" data-srcset="https://img.resume.com/templates/17.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Blue Skies</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="10">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Blue Tabs resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/10.png" data-srcset="https://img.resume.com/templates/10.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Blue Tabs</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="2">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Heavy resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/2.png" data-srcset="https://img.resume.com/templates/2.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Heavy</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="11">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a True Red resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/11.png" data-srcset="https://img.resume.com/templates/11.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">True Red</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="13">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Three Blocks resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/13.png" data-srcset="https://img.resume.com/templates/13.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Three Blocks<span class="template_type">Digital</span></span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="15">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Light Blue resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/15.png" data-srcset="https://img.resume.com/templates/15.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Light Blue<span class="template_type">Digital</span></span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="20">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a My Employment resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/20.png" data-srcset="https://img.resume.com/templates/20.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">My Employment</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="19">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a All Points resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/19.png" data-srcset="https://img.resume.com/templates/19.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">All Points<span class="template_type">Digital</span></span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="6">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Left Justified resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/6.png" data-srcset="https://img.resume.com/templates/6.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Left Justified</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="24">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a van Deco resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/24.png" data-srcset="https://img.resume.com/templates/24.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">van Deco</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="3">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Apple Green resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/3.png" data-srcset="https://img.resume.com/templates/3.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Apple Green</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="9">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Notepad resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/9.png" data-srcset="https://img.resume.com/templates/9.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Notepad<span class="template_type">Digital</span></span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="7">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Right Justified resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/7.png" data-srcset="https://img.resume.com/templates/7.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Right Justified</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="23">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Manhatten resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/23.png" data-srcset="https://img.resume.com/templates/23.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Manhatten</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="21">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Stars resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/21.png" data-srcset="https://img.resume.com/templates/21.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Stars<span class="template_type">Digital</span></span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="12">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Side Panel resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/12.png" data-srcset="https://img.resume.com/templates/12.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Side Panel</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="22">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                            <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                            <img itemprop="image" alt="A sample template of a Doppio resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/22.png" data-srcset="https://img.resume.com/templates/22.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Doppio</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="25">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a New Grid resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/25.png" data-srcset="https://img.resume.com/templates/25.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">New Grid</span>
+                                </div>
+                            </div>
+
+                            <div class="col-xxs-12 col-xs-6 col-sm-4 col-md-3 atemplate" data-template-id="8">
+                                <div class="atemplateWrapper">
+                                    <div class="atemplateImage">
+                                        <span class="sample-resume-hover"><i class="fa fa-check centeredPos"></i> <span class="boxed-green">Select Template</span></span>
+                                        <img itemprop="image" alt="A sample template of a Dot Matrix resume" src="https://img.resume.com/dashboard/default_resume.png" data-src="https://img.resume.com/templates/8.png" data-srcset="https://img.resume.com/templates/8.png" class="tmpl_preview lazy">
+                                    </div>
+                                    <span class="template_name">Dot Matrix<span class="template_type">Digital</span></span>
+                                </div>
+                            </div>
+                            <!-- END TEMPLATE THUMBNAILS -->
+                        </div>
+                    </div>
+                    <div class="main_section boxed-blue main-text">
+                        <div class="container">
+                            <h1 class="header2">How to Create a Professional Résumé</h1>
+                            <p>Resume.com is the best place to build, print, download, and post your resume online for free.</p>
+                            <p>There’s absolutely no cost and it’s easy to start (and finish) writing your professional resume. </p>
+                            <p>Use our free online resume builder to create the perfect resume in just minutes!</p>
+
+                            <h2 class="header3">How Does Our Free Resume Builder Work?</h2>
+                            <p>Creating a professional resume is easy with Resume.com’s free resume builder.</p>
+                            <p>Build your professional resume in 3 easy steps:</p>
+                            <ol type="1">
+                                <li>Pick a free resume template from our wide selection of formatted resume templates.</li>
+                                <li>Fill in the blanks to fill out your resume summary, objective, education, experience, skills, and more. </li>
+                                <li>Print, download, share, and email your professional formatted resume -- or save your progress and return whenever you want!</li>
+                            </ol>
+                            <p>If you aren’t ready to print and download your resume, you can always save your progress and come back to finish later.</p>
+                            <p>You can make as many resumes as you need to find the job you want! </p>
+
+                            <h2 class="header3">Why Choose Resume.com?</h2>
+                            <p>We’re excited to offer you a 100% free, powerful, and straightforward resume builder to help you create a professional resume that will help you land your dream job.</p>
+                            <p>Our step-by-step app will guide you on how to build a resume using resume templates and specific tips from resume experts.</p>
+                            <p>Our resume builder takes the guesswork out of creating a resume. Use your new resume to stand above the competition so you can get hired fast.</p>
+                            <p>Start writing your resume today by <a href="#selectTemplate" title="Select a Templage">selecting a template now</a>!</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /item !-->
+                <div class="carousel-item">
+                    <h3 class="header2 r-builder text-center">Add your name</h3>
+                    <h4 class="header4 r-builder text-center">Well done choosing a template! Now let’s add your name to it.</h4>
+                    <div class="create-form">
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <input autocomplete="off" id="first_name" class="form-control input-lg firstname uName user_name" placeholder="First Name" size="4" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" type="text">
+                                <div class="form-error field-error erruser_namemsg">
+                                    <div id="" class="erruser_namemsgText"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <input class="form-control lastname uName user_name input-lg" id="last_name" placeholder="Last Name" size="2" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 d-none d-sm-block">
+                                <button class="btn boxed-grey btn-lg btn-block submitBack" data-back="1">Back</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-success btn-lg btn-block" id="submitCreateNewAccount1">Next</button>
+                            </div>
+                            <div class="col-sm-6 d-block d-sm-none">
+                                <button class="btn boxed-grey btn-lg btn-block submitBack" data-back="1">Back</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 error form-group hide">
+                                <div class="form-error field-error erruser_namemsg">
+                                    Please correct the errors and try again.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /item !-->
+                <div class="carousel-item">
+                    <h3 class="header2 r-builder text-center">Enter your email</h3>
+                    <h4 class="header4 r-builder text-center">It's important to let employers know how to contact you.</h4>
+                    <div class="create-form">
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label class="control-label">Email</label>
+                                <input class="form-control emailaddress email input-lg" id="email" placeholder="Email Address" size="20" type="email">
+                                <div class="form-error field-error erremailmsg">
+                                    <div id="" class="erremailmsgText"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 d-none d-sm-block">
+                                <button class="btn boxed-grey btn-lg btn-block submitBack" data-back="2">Back</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-success btn-lg btn-block" id="submitCreateNewAccount2">Next</button>
+                            </div>
+                            <div class="col-sm-6 d-block d-sm-none">
+                                <button class="btn boxed-grey btn-lg btn-block submitBack" data-back="2">Back</button>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12 error form-group hide">
+                                <div class="form-error field-error erruser_namemsg">
+                                    Please correct the errors and try again.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /item !-->
+                <div class="carousel-item">
+                    <h3 class="header2 r-builder text-center">Work Industry</h3>
+                    <h4 class="header4 r-builder text-center">What industry do you work in? This helps to improve our services.</h4>
+                    <div class="create-form">
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label class="control-label">Job Category</label>
+                                <input type="text" class="form-control typeahead border-primary job_category" name="query" id="jobcategory_input" placeholder="eg: Retail, Sales, IT & Computers, Marketing, Health, Transportation" data-provide="typeahead" autocomplete="off">
+                                <div class="form-error field-error errjob_categorymsg">
+                                    <div id="" class="errjob_categorymsgText"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 d-none d-sm-block">
+                                <button class="btn boxed-grey btn-lg btn-block submitBack" data-back="3">Back</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-success btn-lg btn-block ladda-button agr-btn" data-style="expand-right" id="submitCreateNewAccount3">
+                                    <span class="ladda-label">Next</span>
+                                </button>
+                            </div>
+                            <div class="col-sm-6 d-block d-sm-none">
+                                <button class="btn boxed-grey btn-lg btn-block submitBack" data-back="3">Back</button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="grey-legal text-center">
+                                    By clicking "Next", you agree to our <a href="/legal" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy</a> and <a href="/cookie" target="_blank">Cookie Policy</a>.
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /item !-->
+            </div>
+        </div>
+        </div>
+
+        <div class="frontpageFooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <ul>
+                        <li class="foot_header">Job Seekers</li>
+                        <li><hr></li>
+                        <li><a href="/builder">Build a Resume</a></li>
+                        <li><a href="/sample">Sample Resumes</a></li>
+                        <li><a href="/coverletter">Sample Cover Letters</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <ul>
+                        <li>Career Center</li>
+                        <li><hr></li>
+                        <li><a href="/careers/career-planning/">Career Planning</a></li>
+                        <li><a href="/careers/cover-letters/">Cover Letters</a></li>
+                        <li><a href="/careers/jobs/">Finding a Job</a></li>
+                        <li><a href="/careers/interview-tips/">Interview Tips</a></li>
+                        <li><a href="/careers/personal-branding/personal-branding-basics/">Personal Branding</a></li>
+                        <li><a href="/careers/resume-writing/">Resume Writing</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <ul>
+                        <li class="foot_header">Jobs</li>
+                        <li><hr></li>
+                        <li><a href="/jobs">Job Search</a></li>
+                        <li><a href="/jobs/employers">Hiring Companies</a></li>
+                        <li><a href="/jobs/states">Find Jobs by State</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <ul>
+                        <li class="foot_header">Help Center</li>
+                        <li><hr></li>
+                        <li><a target="_blank" href="https://support.resume.com/" rel="noopener">Customer Support</a></li>
+                        <li><a href="/passupdate">Reset Password</a></li>
+                        <li><a href="/unsubscribe">Unsubscribe</a></li>
+                        <li><a href="/help">Help Page</a></li>
+                        <li><a href="/sitemap">Sitemap</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <ul>
+                        <li class="foot_header">Stay Connected</li>
+                        <li><hr></li>
+                    </ul>
+                    <div class="stay-connected">
+                        <a href="https://www.linkedin.com/company/resume-com/" target="_blank" title="LinkedIn" rel="noopener">
+                            <svg class="icon icon-linkedin" width="45px" height="45px">
+                                <use class="stay-connected-path" xlink:href="#icon-linkedin"></use>
+                                <symbol id="icon-linkedin" viewBox="0 0 32 32">
+                                    <path class="stay-connected-path" d="M16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16c8.837 0 16-7.163 16-16v0c0-8.837-7.163-16-16-16v0zM12.176 22.696h-3.008v-9.032h3zM11.912 12c-0.307 0.279-0.716 0.45-1.166 0.45-0.026 0-0.052-0.001-0.078-0.002l0.004 0c-0.020 0.001-0.043 0.001-0.066 0.001-0.439 0-0.839-0.171-1.135-0.45l0.001 0.001c-0.286-0.273-0.464-0.657-0.464-1.083 0-0.013 0-0.026 0-0.038l-0 0.002c-0-0.011-0.001-0.025-0.001-0.038 0-0.424 0.182-0.807 0.471-1.073l0.001-0.001c0.306-0.274 0.712-0.442 1.157-0.442 0.026 0 0.053 0.001 0.079 0.002l-0.004-0c0.021-0.001 0.046-0.001 0.071-0.001 0.435 0 0.832 0.165 1.131 0.435l-0.001-0.001c0.292 0.279 0.473 0.671 0.473 1.105 0 0.019-0 0.038-0.001 0.057l0-0.003c0 0.006 0 0.014 0 0.021 0 0.42-0.182 0.797-0.471 1.058l-0.001 0.001zM23.008 22.696h-3.008v-4.8q0-2.040-1.512-2.040c-0.015-0.001-0.033-0.001-0.051-0.001-0.348 0-0.668 0.121-0.92 0.323l0.003-0.002c-0.439 0.324-0.721 0.839-0.721 1.42 0 0.018 0 0.036 0.001 0.054l-0-0.003v5.048h-2.96q0-4.080 0-6.344t0-2.688h2.96v1.288c0.543-0.907 1.521-1.505 2.638-1.505 0.029 0 0.058 0 0.086 0.001l-0.004-0c0.044-0.002 0.095-0.003 0.147-0.003 0.931 0 1.77 0.398 2.355 1.033l0.002 0.002c0.595 0.738 0.956 1.688 0.956 2.721 0 0.112-0.004 0.223-0.013 0.333l0.001-0.015z"></path>
+                                </symbol>
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/resumecom" target="_blank" title="Facebook" rel="noopener">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="45px" height="45px" viewBox="0 0 417.067 417.066" xml:space="preserve">
+                                <path class="stay-connected-path" d="M208.534,0C93.186,0,0,93.186,0,208.533s93.186,208.533,208.534,208.533
+                                        c115.347,0,208.533-93.187,208.533-208.533C417.067,93.186,323.379,0,208.534,0z M254.875,208.533c-10.074,0-19.646,0-29.215,0
+                                        c0,1.008,0,1.512,0,2.52c0,34.252,0,69.007,0,103.259c0,0.504,0,1.512,0,2.016c-13.602,0-26.697,0-40.298,0
+                                        c0-5.541,0-10.578,0-16.119c0-29.719,0-59.437,0-89.155c0-0.504,0-1.511,0-2.519c-9.066,0-17.629,0-26.696,0
+                                        c0-0.504,0-1.511,0-2.015c0-11.082,0-22.163,0-33.245c0-1.511,0.503-2.015,2.015-2.015c7.556,0,15.111,0,23.17,0
+                                        c1.511,0,2.015-0.504,2.015-2.016c0-10.074,0-20.148,0.504-29.718c0.504-7.052,2.015-14.607,5.037-21.156
+                                        c3.525-7.052,9.57-12.089,17.126-14.606c4.029-1.512,8.562-2.016,13.095-3.022c0.504,0,1.009,0,1.513-0.504
+                                        c12.089,0,24.178,0,36.267,0c0,1.007,0,1.511,0,2.519c0,11.082,0,21.659,0,32.741c0,1.511-0.504,2.015-2.015,2.015
+                                        c-6.045,0-12.089,0-18.134,0c-2.016,0-4.029,0.504-6.045,1.008c-3.525,1.008-6.549,4.029-6.549,8.06
+                                        c-0.502,7.556-0.502,15.615-0.502,23.17c0,1.511,1.006,1.007,1.51,1.007c9.57,0,19.646,0,29.216,0c0.504,0,1.511,0,2.015,0
+                                        C257.393,183.852,255.881,195.94,254.875,208.533z"></path>
+                            </svg>
+                        </a>
+                        <a href="https://www.twitter.com/resumecom" target="_blank" title="Twitter" rel="noopener">
+                            <svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="45px" height="45px" viewBox="0 0 417.067 417.066" xml:space="preserve">
+                                <path class="stay-connected-path" d="M208.534,0C93.185,0,0,93.186,0,208.533s93.185,208.533,208.534,208.533
+                                        c115.347,0,208.535-93.187,208.535-208.533C417.067,93.186,323.377,0,208.534,0z M299.2,155.141
+                                        c-4.029,5.037-8.562,9.569-13.6,13.096c-1.008,0.504-1.512,1.511-1.512,2.52c0.504,33.748-11.586,61.955-35.26,85.628
+                                        c-14.606,14.607-32.74,23.172-52.889,27.2c-10.578,2.016-21.156,2.52-32.237,2.016c-18.133-1.512-34.755-7.053-49.867-16.622
+                                        c0,0,0,0-0.503-0.504c21.155,2.015,39.792-3.021,56.918-16.118c-17.63-1.512-29.719-10.578-36.267-27.2
+                                        c6.044,1.007,11.585,1.007,17.125-0.503c-23.17-6.045-31.229-26.697-30.726-38.786c5.541,2.519,10.578,4.533,16.622,4.533
+                                        c-17.126-14.607-21.156-31.733-11.585-52.386c21.155,25.186,47.852,38.785,80.593,41.305c0-2.016-0.504-4.03-0.504-6.044
+                                        c-1.008-16.119,5.541-28.208,19.141-36.267c14.606-9.067,34.252-7.053,46.341,5.036c1.512,1.511,2.52,1.511,4.533,1.007
+                                        c7.053-1.511,13.6-4.533,20.148-8.059c0.502-0.504,1.007-0.504,2.015-1.008c-1.513,4.533-3.526,8.562-6.548,12.089
+                                        s-6.045,6.044-9.066,9.065c7.051-1.006,13.6-3.021,20.652-5.541C302.223,151.615,300.711,153.629,299.2,155.141z"></path>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/resumecom" target="_blank" title="Instagram" rel="noopener">
+                            <svg version="1.1" id="Layer_3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="45px" height="45px" viewBox="0 0 417.067 417.066" xml:space="preserve">
+                                <g>
+                                    <path class="stay-connected-path" d="M295.674,162.696c0-7.052-1.512-14.104-4.533-20.147c-6.044-12.593-16.622-19.142-30.223-20.652
+                                            c-9.066-1.008-18.637-1.512-27.703-1.512c-19.646,0-39.29,0-58.933,0.504c-7.052,0-13.6,0.504-20.652,1.511
+                                            c-16.623,2.519-27.704,13.6-31.23,30.222c-2.015,8.562-2.015,17.629-2.015,26.191c-0.503,10.074,0,20.148,0,30.224
+                                            c0,16.118-0.503,32.74,1.007,48.859c0.504,6.548,2.015,12.592,5.541,18.133c6.548,11.585,16.622,17.126,29.215,18.637
+                                            c9.066,1.008,18.637,1.512,28.207,1.512c19.141,0,38.785,0,57.927-0.504c7.051,0,14.104-0.504,20.651-1.511
+                                            c16.622-2.519,28.207-13.601,31.229-30.223c2.015-8.562,2.015-17.126,2.015-25.688c0-10.074,0-20.147,0-30.726h0.504
+                                            C296.178,193.422,296.178,177.807,295.674,162.696z M208.029,263.94c-30.726,0-55.407-25.186-54.903-55.911
+                                            c0-30.223,25.186-54.903,55.912-54.903c30.223,0,54.902,25.185,54.902,55.407C263.438,239.259,238.756,263.94,208.029,263.94z
+                                             M265.452,164.207c-7.052,0-12.593-6.044-12.593-13.096c0-7.053,6.044-12.592,13.097-12.592c7.555,0,13.096,6.043,12.592,13.096
+                                            C278.547,158.666,272.504,164.207,265.452,164.207z"></path>
+                                    <path class="stay-connected-path" d="M208.533,172.77c-19.644,0-35.763,16.119-36.267,35.764c0,19.645,16.119,35.763,35.763,35.763
+                                            c19.646,0,35.765-16.118,35.765-35.763C244.295,188.889,228.178,172.77,208.533,172.77z"></path>
+                                    <path class="stay-connected-path" d="M208.533,0C93.185,0,0,93.186,0,208.533s93.185,208.533,208.533,208.533
+                                            s208.534-93.187,208.534-208.533C417.067,93.186,323.377,0,208.533,0z M315.823,233.215c-0.504,9.57-0.504,19.142-1.512,28.711
+                                            c-3.021,26.696-19.645,45.838-45.837,51.379c-8.563,2.015-17.126,2.015-25.688,2.015c-19.142,0-38.282,0.504-57.423,0
+                                            c-10.074,0-20.652-0.504-30.726-1.511c-28.208-3.022-47.348-21.156-51.881-48.356c-1.511-7.555-1.511-15.614-2.015-23.17
+                                            c-0.503-19.646-0.503-38.785-0.503-58.431c0-10.073,0.503-20.147,1.511-29.717c3.022-28.209,21.156-47.349,48.356-51.883
+                                            c7.555-1.511,15.615-1.511,23.17-2.015c19.141-0.503,37.776-0.503,56.918-0.503c10.578,0,21.156,0.503,31.229,1.511
+                                            c27.199,3.022,45.838,20.147,51.377,45.837c1.512,8.061,2.016,16.119,2.016,24.178c0,12.09,0,24.179,0,35.764c0,0,0,0,0.504,0
+                                            C315.823,217.096,316.327,225.155,315.823,233.215z"></path>
+                                </g>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <ul>
+                        <li class="foot_header">Our Company</li>
+                        <li>
+                            <hr>
+                        </li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a target="_blank" href="https://support.resume.com/" rel="noopener">Send Feedback</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-legal">
+                <span class="cc_text">Copyright © Resume.com 2018</span>
+                <span>
+                    <a href="/legal">Terms</a>
+                </span>
+                <span>
+                    <a href="/privacy">Privacy Policy</a>
+                </span>
+                <span>
+                    <a href="/cookie">Cookie Policy</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+	// ------- lazy-loading images ---------
+
+    document.addEventListener("DOMContentLoaded", function() {
+      let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+      let active = false;
+
+      const lazyLoad = function() {
+        if (active === false) {
+          active = true;
+
+          setTimeout(function() {
+            lazyImages.forEach(function(lazyImage) {
+              if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                lazyImage.src = lazyImage.dataset.src;
+                lazyImage.srcset = lazyImage.dataset.srcset;
+                lazyImage.classList.remove("lazy");
+
+                lazyImages = lazyImages.filter(function(image) {
+                  return image !== lazyImage;
+                });
+
+                if (lazyImages.length === 0) {
+                  document.removeEventListener("scroll", lazyLoad);
+                  window.removeEventListener("resize", lazyLoad);
+                  window.removeEventListener("orientationchange", lazyLoad);
+                }
+              }
+            });
+
+            active = false;
+          }, 200);
+        }
+      };
+
+      document.addEventListener("scroll", lazyLoad);
+      window.addEventListener("resize", lazyLoad);
+      window.addEventListener("orientationchange", lazyLoad);
+      window.addEventListener("load", lazyLoad);
+
+    });
+    // --------- lazy-loading images end -----------------------
+
+    $(document).ready(function() {
+		// DETECT HASH CHANGE IN URL
+		function locationHashChangedCreateAccount() {
+            $(window).scrollTop(0);
+			if (location.hash === "#Step2") {
+				$('#createaccountCarousel').carousel(1); // to #Step2
+			} else if (location.hash === "#Step3") {
+				$('#createaccountCarousel').carousel(2); // to #Step3
+			} else if (location.hash === "#Step4") {
+				$('#createaccountCarousel').carousel(3); // to #Step4
+			} else {
+				$('#createaccountCarousel').carousel(0); // to #Step1
+			}
+		}
+		window.onhashchange = locationHashChangedCreateAccount;
+
+		// DETECT HASH IN URL ON LOAD
+		locationHashChangedCreateAccount();
+
+		setTimeout(function() {
+
+			$('#createaccountCarousel').carousel({
+				interval: false,
+				pause: true,
+				keyboard: false
+			});
+
+			// Bind progress buttons and simulate loading progress
+			Ladda.bind( '.ladda-button', {
+				callback: function( instance ) {
+					var progress = 0;
+					var interval = setInterval( function() {
+						progress = Math.min( progress + Math.random() * 0.1, 1 );
+						instance.setProgress( progress );
+
+						if( progress === 1 ) {
+							instance.stop();
+							clearInterval( interval );
+						}
+					}, 1500 );
+				}
+			} );
+
+			var categories = [
+				"MLAB",
+				"Accounting",
+				"Airlines",
+				"Aviation",
+				"Alternative Dispute Resolution",
+				"Alternative Medicine",
+				"Animation",
+				"Apparel & Fashion",
+				"Architecture & Planning",
+				"Arts and Crafts",
+				"Automotive",
+				"Aviation & Aerospace",
+				"Banking",
+				"Biotechnology",
+				"Broadcast Media",
+				"Building Materials",
+				"Business Supplies and Equipment",
+				"Capital Markets",
+				"Chemicals",
+				"Social Organization",
+				"Civil Engineering",
+				"Commercial Real Estate",
+				"Computer & Network Security",
+				"Computer Games",
+				"Computer Hardware",
+				"Computer Networking",
+				"Computer Software",
+				"Construction",
+				"Consumer Electronics",
+				"Consumer Goods",
+				"Consumer Services",
+				"Cosmetics",
+				"Dairy",
+				"Defense & Space",
+				"Design",
+				"E-Learning",
+				"Education Management",
+				"Electrical Engineer",
+				"Electrical",
+				"Electronic Manufacturing",
+				"Entertainment",
+				"Environmental Services",
+				"Events Services",
+				"Executive Office",
+				"Facilities Services",
+				"Farming",
+				"Financial Services",
+				"Fine Art",
+				"Fishery",
+				"Food & Beverages",
+				"Food Production",
+				"Fund-Raising",
+				"Furniture",
+				"Gambling & Casinos",
+				"Glass Ceramics & Concrete",
+				"Government Administration",
+				"Government Relations",
+				"Graphic Design",
+				"Hardware Engineer",
+				"Health Wellness and Fitness",
+				"Higher Education",
+				"Hospital & Health Care",
+				"Hospitality",
+				"Human Resources",
+				"Import and Export",
+				"Individual & Family Services",
+				"Industrial Automation",
+				"Information Services",
+				"Information Technology and Services",
+				"Insurance",
+				"International Affairs",
+				"International Trade and Development",
+				"Internet",
+				"Investment Banking",
+				"Investment Management",
+				"Judiciary",
+				"Law Enforcement",
+				"Law Practice",
+				"Legal Services",
+				"Legislative Office",
+				"Leisure Travel & Tourism",
+				"Libraries",
+				"Logistics and Supply Chain",
+				"Luxury Goods & Jewelry",
+				"Machinery",
+				"Management Consulting",
+				"Maritime",
+				"Market Research",
+				"Marketing and Advertising",
+				"Mechanical or Industrial Engineering",
+				"Media Production",
+				"Medical Devices",
+				"Medical Practice",
+				"Mental Health Care",
+				"Military",
+				"Mining & Metals",
+				"Motion Pictures and Film",
+				"Museums and Institutions",
+				"Music",
+				"Nanotechnology",
+				"Newspapers",
+				"Non-Profit Organization Management",
+				"Oil & Energy",
+				"Online Media",
+				"Outsourcing / Offshoring",
+				"Package / Freight Delivery",
+				"Packaging and Containers",
+				"Paper & Forest Products",
+				"Performing Arts",
+				"Pharmaceuticals",
+				"Philanthropy",
+				"Photography",
+				"Plastics",
+				"Political Organization",
+				"Primary / Secondary Education",
+				"Printing",
+				"Professional Training & Coaching",
+				"Program Development",
+				"Public Policy",
+				"Public Relations and Communications",
+				"Public Safety",
+				"Publishing",
+				"Real Estate",
+				"Railroad Manufacture",
+				"Ranching",
+				"Real Estate",
+				"Recreational Facilities and Services",
+				"Religious Institutions",
+				"Renewables & Environment",
+				"Research",
+				"Restaurants",
+				"Retail",
+				"Security and Investigations",
+				"Semiconductors",
+				"Shipbuilding",
+				"Sporting Goods",
+				"Sports",
+				"Staffing and Recruiting",
+				"Supermarkets",
+				"Telecommunications",
+				"Textiles",
+				"Think Tanks",
+				"Tobacco",
+				"Translation and Localization",
+				"Transportation",
+				"Trucking",
+				"Railroad",
+				"Utilities",
+				"Venture Capital & Private Equity",
+				"Veterinary",
+				"Warehousing",
+				"Wholesale",
+				"Wine and Spirits",
+				"Wireless",
+				"Writing and Editing",
+				"Browse Categories",
+				"Front End Developer",
+				"Back End Developer",
+				"Mortgage"
+			];
+
+			var substringMatcher = function(strs) {
+				return function findMatches(q, cb) {
+					var matches, substringRegex;
+
+					// an array that will be populated with substring matches
+					matches = [];
+
+					// regex used to determine if a string contains the substring `q`
+					substrRegex = new RegExp(q, 'i');
+
+					// iterate through the pool of strings and for any string that
+					// contains the substring `q`, add it to the `matches` array
+					$.each(strs, function(i, str) {
+						if (substrRegex.test(str)) {
+							matches.push(str);
+						}
+					});
+
+					cb(matches);
+				};
+			};
+
+			$('#jobcategory_input').typeahead({
+				hint: true,
+				highlight: true,
+				minLength: 1
+			}, {
+				name: 'categories',
+				source: substringMatcher(categories)
+			});
+
+
+		},100);
+
+    });
+
+
+    $(".resumeBuilder-icon-1").click(function(event) {
+        $('.arrow-up').hide();
+        $('.resumeBuilder-icon-1 .arrow-up').show();
+        $('#createaccountCarousel').carousel(0);
+    });
+
+    $(".resumeBuilder-icon-2").click(function(event) {
+        $('.arrow-up').hide();
+        $('.resumeBuilder-icon-2 .arrow-up').show();
+        $('#createaccountCarousel').carousel(1);
+    });
+
+    $(".submitBack").click(function(event) {
+        var back = $(event.currentTarget).data("back");
+        location.hash = "#Step" + back;
+        $('#createaccountCarousel').carousel(back - 1);
+    });
+
+    $(".atemplate").click(function(event) {
+        var templage_id = $(event.currentTarget).data("template-id");
+        console.log('templage_id', templage_id);
+        $(".atemplate").removeClass('currentSelectedTemplate');
+        $(event.currentTarget).addClass('currentSelectedTemplate');
+        $('.arrow-up').hide();
+        $('.resumeBuilder-icon-2 .arrow-up').show();
+        location.hash = "#Step2";
+        $('#createaccountCarousel').carousel(1);
+    });
+
+    $("#submitCreateNewAccount1").click(function(event) {
+        submitCreateNewAccount1(event);
+    });
+
+    $("input#last_name").keypress(function(event) {
+        if(event.which == 13) {
+            submitCreateNewAccount1(event);
+        }
+    });
+
+    $("#submitCreateNewAccount2").click(function(event) {
+        submitCreateNewAccount2(event);
+    });
+
+    $("input#email").keypress(function(event) {
+        if(event.which == 13) {
+            submitCreateNewAccount2(event);
+        }
+    });
+
+    $("input#jobcategory_input").keypress(function(event) {
+        if(event.which == 13) {
+            submitCreateNewAccount3(event);
+        }
+    });
+    $("#submitCreateNewAccount3").click(function(event) {
+        submitCreateNewAccount3(event);
+    });
+
+    var submitCreateNewAccount1 = function(event) {
+        $('.arrow-up').hide();
+        $('.resumeBuilder-icon-2 .arrow-up').show();
+        $("div.form-error").hide();
+        if (($.trim($("#first_name").val()) == "") || ($.trim($("#last_name").val()) == "")) {
+            setError("user_name", "Please, enter your full name.");
+        } else if (!myRegEx.test($("#first_name").val()) || !myRegEx.test($("#last_name").val())) {
+            setError("user_name", "Please enter your full name. Valid characters include A-z, space, '_' underscore, and '-' dash.");
+        } else {
+            location.hash = "#Step3";
+            $('#createaccountCarousel').carousel(2);
+        }
+    }
+
+    var submitCreateNewAccount2 = function(event) {
+        $('.arrow-up').hide();
+        $('.resumeBuilder-icon-2 .arrow-up').show();
+        $("div.form-error").hide();
+        $("div").removeClass("has-error");
+
+        var email = $("#email").val().toLowerCase();
+        if (($.trim(email) != "") && isEmail(email)) {
+            location.hash = "#Step4";
+            $('#createaccountCarousel').carousel(3);
+        } else {
+            setError("email", "Please enter a valid email");
+        }
+    }
+
+    var submitCreateNewAccount3 = function(event) {
+        var minErrorStep = -1;
+        $('.arrow-up').hide();
+        $('.resumeBuilder-icon-2 .arrow-up').show();
+        $("div.form-error").hide();
+        var email = $("#email").val().toLowerCase();
+
+        //CHECK JC
+        if ($.trim($("#jobcategory_input").val()) == "") {
+            errorMessage = "Please enter a work industry";
+            className = "job_category";
+            minErrorStep = 3;
+            setError(className, errorMessage);
+        }
+        //CHECK EMAIL
+        if (($.trim(email) == "")) {
+            minErrorStep = 2;
+        }
+
+        if (!isEmail(email)) {
+            minErrorStep = 2;
+        }
+        //CHECK NAME
+        if (($.trim($("#first_name").val()) == "") || ($.trim($("#last_name").val()) == "")) {
+            minErrorStep = 1;
+        } else if (!myRegEx.test($("#first_name").val()) || !myRegEx.test($("#last_name").val())) {
+            minErrorStep = 1;
+        }
+
+        if (minErrorStep > 0) {
+            console.log('should stop');
+            Ladda.stopAll();
+            location.hash = "#Step" + (minErrorStep + 1);
+            if (minErrorStep == 1) {
+                setError("user_name", "Please, enter your full name.");
+            } else if (minErrorStep == 2) {
+                setError("email", "Please enter a valid email");
+            }
+            $('#createaccountCarousel').carousel(minErrorStep);
+        } else {
+            var post = {
+                "fName": $('#first_name').val(),
+                "lName": $('#last_name').val(),
+                "email": $('#email').val(),
+                "jcategorys": $('#jobcategory_input').val(),
+                "templateID": $('.currentSelectedTemplate').data("template-id") || $.getUrlVar('template') || 1,
+                "agreePage": "https://www.resume.com/builder",
+            }
+
+            //console.log('post data', post);
+            $.ajax({
+                type: "POST",
+                url: "/user/create",
+                data: post,
+                success: function(data, textStatus, jqXHR) {
+                    Ladda.stopAll();
+                    window.location.href = "/dashboard/" + data.emailHash + "?wizard=true";
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    Ladda.stopAll();
+                    if (XMLHttpRequest.status == 403) {
+                        setError("email", "Email already exists.");
+                        location.hash = "#Step3";
+                    } else {
+                        setError("job_category", "Sorry, something went wrong. Please, try again later or contact support@resume.com. " + errorThrown + " - " + textStatus);
+                    }
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                },
+                dataType: 'json'
+            });
+        }
+    };
+
+    var myRegEx = /^([a-zA-Z0-9 _-]+)$/;
+
+    function setError(className, errorMessage) {
+        if (className && errorMessage) {
+            $(".err" + className + "msg").show();
+            $("input." + className).parent().addClass("has-error");
+            $(".err" + className + "msgText").empty().html(errorMessage);
+        }
+        $(".err" + className + "msgText").empty().html(errorMessage);
+    }
+
+    isEmail = function(email) {
+        var regex = /^([*+!.&#$В¦\'\\%\/0-9a-z^_`{}=?~:-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,4})$/i;
+        return regex.test(email);
+    };
+
+
+	(function($){
+        $.getUrlVar = function(key){
+            var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
+            return result && unescape(result[1]) || "";
+        };
+    })(jQuery);
+
+	if ('serviceWorker' in navigator) {
+	  window.addEventListener('load', function() {
+		navigator.serviceWorker.register('/pwa/builder.js').then(function(registration) {
+		  // Registration was successful
+		}, function(err) {
+		  // registration failed :(
+		  console.log('ServiceWorker registration failed: ', err);
+		});
+	  });
+	}
+</script>
+</body>
+</html>
